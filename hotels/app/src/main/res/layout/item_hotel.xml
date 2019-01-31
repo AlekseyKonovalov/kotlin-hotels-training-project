@@ -4,7 +4,8 @@
              android:id="@+id/hotel_card"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             android:layout_marginTop="10dp"
+             android:layout_marginTop="5dp"
+             android:layout_marginBottom="10dp"
              android:background="@android:color/transparent">
 
     <android.support.design.card.MaterialCardView
@@ -44,6 +45,8 @@
                         android:id="@+id/name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginLeft="15dp"
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:text="Best Western President Hotel"/>
@@ -52,6 +55,8 @@
                         android:id="@+id/address"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginLeft="15dp"
                         android:layout_marginTop="10dp"
                         android:textSize="10dp"
                         android:layout_gravity="center"

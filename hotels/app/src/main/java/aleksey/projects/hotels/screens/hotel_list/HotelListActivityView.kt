@@ -47,7 +47,6 @@ class HotelListActivity : DaggerAppCompatActivity(), HotelListActivityView {
     override fun initToolbar() {
         toolbar.title = "Hotels"
         setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     override fun initViews() {
