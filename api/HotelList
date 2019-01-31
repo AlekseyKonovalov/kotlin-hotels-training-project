@@ -48,11 +48,11 @@
 		"suites_availability": "232"
 	},
 	{
-    "id": 13370,
-    "name": "D-Resort Gocek Special Category",
-    "address": "250 East 50th Street",
-    "stars": 2.0,
-    "distance": 13.10,
-    "suites_availability": "94"
-  }
+		 "id": 13370,
+		 "name": "D-Resort Gocek Special Category",
+		 "address": "250 East 50th Street",
+		 "stars": 2.0,
+		 "distance": 13.10,
+		 "suites_availability": "94"
+	}
 ]
