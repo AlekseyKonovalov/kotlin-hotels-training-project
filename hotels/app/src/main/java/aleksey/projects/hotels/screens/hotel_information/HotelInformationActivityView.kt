@@ -70,7 +70,16 @@ class HotelInformationActivity : DaggerAppCompatActivity(), HotelInformationActi
     }
 
     override fun initViews() {
+        tabsPager.adapter = TabsPagerAdapter(supportFragmentManager, this@HotelInformationActivity)
+        tabLayout.setupWithViewPager(tabsPager)
+        tabLayout.setOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabReselected(p0: TabLayout.Tab?) {}
+            override fun onTabUnselected(p0: TabLayout.Tab?) {}
 
+            override fun onTabSelected(currentTab: TabLayout.Tab) {
+                tabsPager.currentItem = currentTab.position
+            }
+        })
     }
 
     override fun initListeners() {
