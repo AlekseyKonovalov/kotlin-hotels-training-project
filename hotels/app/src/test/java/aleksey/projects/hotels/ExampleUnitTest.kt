@@ -1,4 +1,4 @@
-package aleksey.projects.hostels
+package aleksey.projects.hotels
 
 import org.junit.Test
 

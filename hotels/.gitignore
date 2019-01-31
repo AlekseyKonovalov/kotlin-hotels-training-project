@@ -64,3 +64,10 @@ fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
 fastlane/readme.md
+hostels/gradle.properties
+hostels/gradle/wrapper/gradle-wrapper.jar
+hostels/gradle/wrapper/gradle-wrapper.properties
+hostels/gradlew
+hostels/gradlew.bat
+hostels/settings.gradle
+hostels/app/proguard-rules.pro
