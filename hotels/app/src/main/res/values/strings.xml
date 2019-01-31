@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">hotels</string>
+
+    /* Common */
+    <string name="internet_error">Ошибка, попробуйте позже</string>
+
+    /* Hotel list */
+
+
 </resources>
