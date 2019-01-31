@@ -1,0 +1,11 @@
+{
+  "id":80899,
+  "name":"Crystal Hotel Bodrum All Inclusive",
+  "address":"69 West 38th Street",
+  "stars":2,
+  "distance":99.9,
+  "suites_availability":"24",
+  "image":["url","url","url"],
+  "lat":40.752115,
+  "lon":-73.985451
+}

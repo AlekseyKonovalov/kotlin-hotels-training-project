@@ -1,0 +1,11 @@
+{
+"id": 22470,
+		"name": "Royal Comfort Hotel",
+		"address": "215 West 94th Street",
+		"stars": 1.0,
+		"distance": 999.9,
+		"suites_availability": "15",
+    "image":["url","url","url"],
+    "lat": 40.79339950000000,
+    "lon": -73.97285789999999
+}
