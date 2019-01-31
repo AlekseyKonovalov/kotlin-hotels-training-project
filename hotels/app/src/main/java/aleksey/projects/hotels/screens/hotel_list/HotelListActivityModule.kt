@@ -8,13 +8,15 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class HotelListActivityModule{
+class HotelListActivityModule {
 
     @PerActivity
     @Provides
-    fun providePresenter(activity: HotelListActivity,
-                         interactor: HotelListActivityInteractor,
-                         resourceManager: HotelListActivityResourceManager): HotelListActivityPresenter {
+    fun providePresenter(
+        activity: HotelListActivity,
+        interactor: HotelListActivityInteractor,
+        resourceManager: HotelListActivityResourceManager
+    ): HotelListActivityPresenter {
         val presenter = HotelListActivityPresenterImpl(interactor, resourceManager)
         activity.lifecycle.addObserver(presenter)
         presenter.attachView(activity)

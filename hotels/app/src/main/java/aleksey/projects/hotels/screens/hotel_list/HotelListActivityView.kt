@@ -5,6 +5,7 @@ import aleksey.projects.hotels.extensions.defaultConfig
 import aleksey.projects.hotels.screens.common.BaseView
 import aleksey.projects.hotels.screens.hotel_list.adapter.HotelsAdapter
 import aleksey.projects.hotels.screens.hotel_list.models.HotelModel
+import aleksey.projects.hotels.view.ProgressOverlay
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -12,7 +13,7 @@ import android.support.design.widget.CoordinatorLayout
 import android.support.design.widget.Snackbar
 import android.support.v7.widget.RecyclerView
 import dagger.android.support.DaggerAppCompatActivity
-import kotlinx.android.synthetic.main.hotel_list.*
+import kotlinx.android.synthetic.main.activity_hotel_list.*
 import javax.inject.Inject
 
 fun startHotelListActivity(context: Context) {
@@ -23,6 +24,8 @@ fun startHotelListActivity(context: Context) {
 interface HotelListActivityView : BaseView {
     fun submitHotelsItems(items: List<HotelModel>)
     fun showSnackbar(message: String)
+    fun showProgressBar()
+    fun hideProgressBar()
 }
 
 class HotelListActivity : DaggerAppCompatActivity(), HotelListActivityView {
@@ -34,9 +37,13 @@ class HotelListActivity : DaggerAppCompatActivity(), HotelListActivityView {
     private lateinit var root: CoordinatorLayout
     private lateinit var hotelsRecyclerView: RecyclerView
 
+    private val progressOverlay: ProgressOverlay by lazy {
+        ProgressOverlay(this.root)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.hotel_list)
+        setContentView(R.layout.activity_hotel_list)
 
         initViews()
         initListeners()
@@ -53,7 +60,7 @@ class HotelListActivity : DaggerAppCompatActivity(), HotelListActivityView {
         root = findViewById(R.id.root)
         hotelsRecyclerView = findViewById(R.id.hotels_recycler_view)
 
-        hotelsAdapter = HotelsAdapter()
+        hotelsAdapter = HotelsAdapter(this@HotelListActivity)
         hotelsRecyclerView.adapter = hotelsAdapter
     }
 
@@ -71,5 +78,12 @@ class HotelListActivity : DaggerAppCompatActivity(), HotelListActivityView {
         hotelsAdapter.setItems(items)
     }
 
+    override fun showProgressBar() {
+        progressOverlay.show()
+    }
+
+    override fun hideProgressBar() {
+        progressOverlay.hide()
+    }
 
 }

@@ -7,13 +7,13 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.plusAssign
 import timber.log.Timber
 
-interface HotelListActivityPresenter : BasePresenter<HotelListActivityView> {
+interface HotelListActivityPresenter: BasePresenter<HotelListActivityView> {
     fun loadHotels()
 }
 
 class HotelListActivityPresenterImpl(
-    val interactor: HotelListActivityInteractor,
-    val resourceManager: HotelListActivityResourceManager
+    private val interactor: HotelListActivityInteractor,
+    private val resourceManager: HotelListActivityResourceManager
 ) : HotelListActivityPresenter, LifecycleObserver {
 
     private var view: HotelListActivityView? = null
@@ -29,14 +29,17 @@ class HotelListActivityPresenterImpl(
     }
 
     override fun loadHotels() {
+        view?.showProgressBar()
         disposables += interactor.getHotels()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 { response ->
+                    view?.hideProgressBar()
                     view?.submitHotelsItems(response)
                 },
                 { error ->
                     Timber.e(error)
+                    view?.hideProgressBar()
                     view?.showSnackbar(resourceManager.getInternetError())
                 }
             )

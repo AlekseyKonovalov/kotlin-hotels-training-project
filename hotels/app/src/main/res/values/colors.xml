@@ -16,4 +16,8 @@
 
     <color name="search_view_hint_color">#50FFFFFF</color>
 
+    <color name="progress_background">#0A000000</color>
+
+    <color name="progress_background_gray">#32000000</color>
+
 </resources>
