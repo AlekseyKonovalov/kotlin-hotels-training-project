@@ -1,9 +1,7 @@
 package aleksey.projects.hotels.screens.hotel_list
 
 import aleksey.projects.hotels.screens.common.BasePresenter
-import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleObserver
-import android.arch.lifecycle.OnLifecycleEvent
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.plusAssign
@@ -30,7 +28,6 @@ class HotelListActivityPresenterImpl(
         this.view = null
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     override fun loadHotels() {
         disposables += interactor.getHotels()
             .observeOn(AndroidSchedulers.mainThread())

@@ -20,6 +20,8 @@ data class Hotel(
     @ColumnInfo
     var suitesAvailability: Int?,
     @ColumnInfo
+    var mainImage: String?,
+    @ColumnInfo
     var image: List<String>?,
     @ColumnInfo
     var lat: Double,
