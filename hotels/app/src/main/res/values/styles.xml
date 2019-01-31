@@ -31,5 +31,10 @@
         <item name="android:theme">@style/ToolbarTheme</item>
     </style>
 
+    <style name="TextView.Primary" parent="@android:style/Widget.TextView">
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">@dimen/text_normal_size</item>
+    </style>
 
 </resources>

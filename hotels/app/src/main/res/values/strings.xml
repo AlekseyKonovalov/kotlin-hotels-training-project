@@ -8,7 +8,9 @@
     <string name="sans_serif_medium" translatable="false">sans-serif-medium</string>
     <string name="sans_serif" translatable="false">sans-serif</string>
 
-    /* Hotel list */
-
+    /* Hotel information */
+    <string name="hotel_info_about_hotel">Об отеле</string>
+    <string name="hotel_info_contact_hotel">Контакты</string>
+    <string name="hotel_info_toolbar">Информация об отеле</string>
 
 </resources>

@@ -3,11 +3,15 @@ package aleksey.projects.hotels.screens.hotel_information
 import aleksey.projects.hotels.R
 import aleksey.projects.hotels.extensions.defaultConfig
 import aleksey.projects.hotels.screens.common.BaseView
+import aleksey.projects.hotels.view.ProgressOverlay
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.CoordinatorLayout
 import android.support.design.widget.Snackbar
+import android.support.design.widget.TabLayout
+import android.support.v4.view.ViewPager
+import android.support.v7.widget.Toolbar
 import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 
@@ -32,7 +36,15 @@ class HotelInformationActivity : DaggerAppCompatActivity(), HotelInformationActi
 
     private lateinit var root: CoordinatorLayout
 
-    private var hotelId: Int? = null
+    private lateinit var toolbar: Toolbar
+    private lateinit var tabsPager: ViewPager
+    private lateinit var tabLayout: TabLayout
+
+    var hotelId: Int? = null
+
+    private val progressOverlay: ProgressOverlay by lazy {
+        ProgressOverlay(this.root)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +61,12 @@ class HotelInformationActivity : DaggerAppCompatActivity(), HotelInformationActi
 
 
     override fun initToolbar() {
-
+        toolbar.title = getString(R.string.hotel_info_toolbar)
+        setSupportActionBar(toolbar)
+        toolbar.setNavigationOnClickListener {
+            finish()
+        }
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     override fun initViews() {
@@ -62,11 +79,11 @@ class HotelInformationActivity : DaggerAppCompatActivity(), HotelInformationActi
 
 
     override fun showProgressBar() {
-
+        progressOverlay.show()
     }
 
     override fun hideProgressBar() {
-
+        progressOverlay.hide()
     }
 
     override fun showSnackbar(message: String) {
