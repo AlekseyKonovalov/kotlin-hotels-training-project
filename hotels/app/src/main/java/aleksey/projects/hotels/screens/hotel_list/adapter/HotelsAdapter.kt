@@ -42,7 +42,7 @@ class HotelsAdapter(val context: Context) : RecyclerView.Adapter<HotelsAdapter.H
     }
 
     inner class HotelsViewHolder(val view: View) : BindedViewHolder<HotelModel>(view) {
-        private val rootView: FrameLayout =  view.findViewById<View>(R.id.hotel_card) as FrameLayout
+        private val rootView: FrameLayout = view.findViewById<View>(R.id.hotel_card) as FrameLayout
 
         private val name: TextView = view.findViewById<View>(R.id.name) as TextView
         private val address: TextView = view.findViewById<View>(R.id.address) as TextView
