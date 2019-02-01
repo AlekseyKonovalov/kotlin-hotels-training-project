@@ -1,7 +1,9 @@
 package aleksey.projects.hotels.screens.hotel_information
 
 import aleksey.projects.hotels.screens.common.BasePresenter
+import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleObserver
+import android.arch.lifecycle.OnLifecycleEvent
 import io.reactivex.disposables.CompositeDisposable
 
 interface HotelInformationActivityPresenter : BasePresenter<HotelInformationActivityView> {
@@ -20,6 +22,7 @@ class HotelInformationActivityPresenterImpl(
         this.view = view
     }
 
+    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     override fun detachView() {
         disposables.dispose()
         this.view = null

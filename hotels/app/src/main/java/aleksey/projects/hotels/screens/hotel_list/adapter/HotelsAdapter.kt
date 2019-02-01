@@ -4,7 +4,6 @@ import aleksey.projects.hotels.R
 import aleksey.projects.hotels.extensions.inflate
 import aleksey.projects.hotels.helper.GlideHelper
 import aleksey.projects.hotels.screens.common.BindedViewHolder
-import aleksey.projects.hotels.screens.common.OnItemClickListener
 import aleksey.projects.hotels.screens.hotel_information.startHotelInformationActivity
 import aleksey.projects.hotels.screens.hotel_list.models.HotelModel
 import android.content.Context
@@ -19,7 +18,6 @@ import android.widget.TextView
 class HotelsAdapter(val context: Context) : RecyclerView.Adapter<HotelsAdapter.HotelsViewHolder>() {
 
     private var items: MutableList<HotelModel> = mutableListOf()
-    var listener: OnItemClickListener<HotelModel>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, position: Int): HotelsViewHolder {
         val view = parent.inflate(R.layout.item_hotel)
@@ -30,9 +28,6 @@ class HotelsAdapter(val context: Context) : RecyclerView.Adapter<HotelsAdapter.H
 
     override fun onBindViewHolder(holder: HotelsViewHolder, position: Int) {
         holder.bind(items[position])
-        holder.itemView.setOnClickListener {
-            startHotelInformationActivity(context, items[position].hotelId)
-        }
     }
 
     override fun getItemCount(): Int = items.size
@@ -70,7 +65,7 @@ class HotelsAdapter(val context: Context) : RecyclerView.Adapter<HotelsAdapter.H
             setStarsView(data)
 
             card.setOnClickListener {
-
+                startHotelInformationActivity(context, items[position].hotelId)
             }
         }
 

@@ -1,6 +1,7 @@
 package aleksey.projects.hotels.screens.hotel_information
 
 import aleksey.projects.hotels.R
+import aleksey.projects.hotels.screens.hotel_information.contact_hotel.ContactHotelFragment
 import android.content.Context
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
@@ -17,9 +18,9 @@ class TabsPagerAdapter(fragmentManager: FragmentManager, val context: Context) :
 
     override fun getItem(position: Int): Fragment {
         return when (position) {
-            0 -> AboutHotelFragment()
+            0 -> ContactHotelFragment()
             1 -> ContactHotelFragment()
-            else -> AboutHotelFragment()
+            else -> ContactHotelFragment()
         }
     }
 

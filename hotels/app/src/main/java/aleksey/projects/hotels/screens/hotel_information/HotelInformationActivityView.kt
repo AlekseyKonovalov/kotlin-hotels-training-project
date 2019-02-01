@@ -7,6 +7,7 @@ import aleksey.projects.hotels.view.ProgressOverlay
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.design.widget.AppBarLayout
 import android.support.design.widget.CoordinatorLayout
 import android.support.design.widget.Snackbar
 import android.support.design.widget.TabLayout
@@ -34,12 +35,12 @@ class HotelInformationActivity : DaggerAppCompatActivity(), HotelInformationActi
     @Inject
     lateinit var presenter: HotelInformationActivityPresenter
 
-    private lateinit var root: CoordinatorLayout
+    private val root: CoordinatorLayout = findViewById(R.id.root)
+    private val toolbar: Toolbar = findViewById(R.id.toolbar)
+    private val topAppBar: AppBarLayout = findViewById(R.id.top_app_bar)
 
-    private lateinit var toolbar: Toolbar
     private lateinit var tabsPager: ViewPager
     private lateinit var tabLayout: TabLayout
-
     var hotelId: Int? = null
 
     private val progressOverlay: ProgressOverlay by lazy {
@@ -67,9 +68,16 @@ class HotelInformationActivity : DaggerAppCompatActivity(), HotelInformationActi
             finish()
         }
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        topAppBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
+            if (Math.abs(verticalOffset) == topAppBar.totalScrollRange) {
+                toolbar.title = "hotel"
+                toolbar.subtitle = "hotel"
+            }
+        })
     }
 
     override fun initViews() {
+
         tabsPager.adapter = TabsPagerAdapter(supportFragmentManager, this@HotelInformationActivity)
         tabLayout.setupWithViewPager(tabsPager)
         tabLayout.setOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {

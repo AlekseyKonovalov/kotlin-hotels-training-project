@@ -34,8 +34,8 @@ class HotelListActivity : DaggerAppCompatActivity(), HotelListActivityView {
     lateinit var presenter: HotelListActivityPresenter
     private lateinit var hotelsAdapter: HotelsAdapter
 
-    private lateinit var root: CoordinatorLayout
-    private lateinit var hotelsRecyclerView: RecyclerView
+    private val root: CoordinatorLayout = findViewById(R.id.root)
+    private val hotelsRecyclerView: RecyclerView = findViewById(R.id.hotels_recycler_view)
 
     private val progressOverlay: ProgressOverlay by lazy {
         ProgressOverlay(this.root)
@@ -57,9 +57,6 @@ class HotelListActivity : DaggerAppCompatActivity(), HotelListActivityView {
     }
 
     override fun initViews() {
-        root = findViewById(R.id.root)
-        hotelsRecyclerView = findViewById(R.id.hotels_recycler_view)
-
         hotelsAdapter = HotelsAdapter(this@HotelListActivity)
         hotelsRecyclerView.adapter = hotelsAdapter
     }

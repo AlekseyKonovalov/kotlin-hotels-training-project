@@ -8,7 +8,7 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class FavoritesActivityModule {
+class HotelInformationActivityModule {
 
     @PerActivity
     @Provides
@@ -29,7 +29,7 @@ class FavoritesActivityModule {
 
     @PerActivity
     @Provides
-    fun provideResourseManager(context: Context):HotelInformationActivityResourceManager {
+    fun provideResourceManager(context: Context):HotelInformationActivityResourceManager {
         return HotelInformationActivityResourceManagerImpl(context.resources)
     }
 
