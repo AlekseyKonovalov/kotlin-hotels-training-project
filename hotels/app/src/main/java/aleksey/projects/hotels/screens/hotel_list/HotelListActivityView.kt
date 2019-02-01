@@ -3,6 +3,8 @@ package aleksey.projects.hotels.screens.hotel_list
 import aleksey.projects.hotels.R
 import aleksey.projects.hotels.extensions.defaultConfig
 import aleksey.projects.hotels.screens.common.BaseView
+import aleksey.projects.hotels.screens.common.OnItemClickListener
+import aleksey.projects.hotels.screens.hotel_information.startHotelInformationActivity
 import aleksey.projects.hotels.screens.hotel_list.adapter.HotelsAdapter
 import aleksey.projects.hotels.screens.hotel_list.models.HotelModel
 import aleksey.projects.hotels.view.ProgressOverlay
@@ -34,8 +36,8 @@ class HotelListActivity : DaggerAppCompatActivity(), HotelListActivityView {
     lateinit var presenter: HotelListActivityPresenter
     private lateinit var hotelsAdapter: HotelsAdapter
 
-    private val root: CoordinatorLayout = findViewById(R.id.root)
-    private val hotelsRecyclerView: RecyclerView = findViewById(R.id.hotels_recycler_view)
+    private lateinit var root: CoordinatorLayout
+    private lateinit var hotelsRecyclerView: RecyclerView
 
     private val progressOverlay: ProgressOverlay by lazy {
         ProgressOverlay(this.root)
@@ -57,12 +59,19 @@ class HotelListActivity : DaggerAppCompatActivity(), HotelListActivityView {
     }
 
     override fun initViews() {
+        root = findViewById(R.id.root)
+        hotelsRecyclerView = findViewById(R.id.hotels_recycler_view)
+
         hotelsAdapter = HotelsAdapter(this@HotelListActivity)
         hotelsRecyclerView.adapter = hotelsAdapter
     }
 
     override fun initListeners() {
-
+        hotelsAdapter.listener = object : OnItemClickListener<HotelModel> {
+            override fun onClick(data: HotelModel) {
+                startHotelInformationActivity(this@HotelListActivity, data.hotelId)
+            }
+        }
     }
 
     override fun showSnackbar(message: String) {

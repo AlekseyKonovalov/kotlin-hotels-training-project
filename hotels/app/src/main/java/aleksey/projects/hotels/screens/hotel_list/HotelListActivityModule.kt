@@ -31,7 +31,7 @@ class HotelListActivityModule {
 
     @PerActivity
     @Provides
-    fun provideResourseManager(context: Context): HotelListActivityResourceManager {
+    fun provideResourceManager(context: Context): HotelListActivityResourceManager {
         return HotelListActivityResourceManagerImpl(context.resources)
     }
 

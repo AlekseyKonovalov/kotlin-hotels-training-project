@@ -21,7 +21,8 @@ class ContactHotelFragment : DaggerFragment(), ContactHotelFragmentView {
     private lateinit var root: CoordinatorLayout
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_contact_hotel, root, false)
+        root = inflater.inflate(R.layout.fragment_contact_hotel, container, false) as CoordinatorLayout
+        return root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

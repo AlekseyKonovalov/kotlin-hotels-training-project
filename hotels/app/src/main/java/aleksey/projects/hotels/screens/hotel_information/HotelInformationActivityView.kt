@@ -2,17 +2,19 @@ package aleksey.projects.hotels.screens.hotel_information
 
 import aleksey.projects.hotels.R
 import aleksey.projects.hotels.extensions.defaultConfig
+import aleksey.projects.hotels.helper.GlideHelper
 import aleksey.projects.hotels.screens.common.BaseView
+import aleksey.projects.hotels.screens.hotel_list.models.HotelModel
 import aleksey.projects.hotels.view.ProgressOverlay
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.AppBarLayout
 import android.support.design.widget.CoordinatorLayout
 import android.support.design.widget.Snackbar
 import android.support.design.widget.TabLayout
 import android.support.v4.view.ViewPager
 import android.support.v7.widget.Toolbar
+import android.widget.ImageView
 import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 
@@ -28,6 +30,7 @@ interface HotelInformationActivityView : BaseView {
     fun showProgressBar()
     fun hideProgressBar()
     fun showSnackbar(message: String)
+    fun setViews(hotelModel: HotelModel)
 }
 
 class HotelInformationActivity : DaggerAppCompatActivity(), HotelInformationActivityView {
@@ -35,12 +38,13 @@ class HotelInformationActivity : DaggerAppCompatActivity(), HotelInformationActi
     @Inject
     lateinit var presenter: HotelInformationActivityPresenter
 
-    private val root: CoordinatorLayout = findViewById(R.id.root)
-    private val toolbar: Toolbar = findViewById(R.id.toolbar)
-    private val topAppBar: AppBarLayout = findViewById(R.id.top_app_bar)
+    private lateinit var root: CoordinatorLayout
+    private  lateinit var toolbar: Toolbar
 
     private lateinit var tabsPager: ViewPager
     private lateinit var tabLayout: TabLayout
+    private  lateinit var mainImage: ImageView
+
     var hotelId: Int? = null
 
     private val progressOverlay: ProgressOverlay by lazy {
@@ -58,25 +62,27 @@ class HotelInformationActivity : DaggerAppCompatActivity(), HotelInformationActi
         initViews()
         initListeners()
         initToolbar()
+
+        hotelId?.let {  presenter.loadHotelInfo(it) }
     }
 
 
     override fun initToolbar() {
-        toolbar.title = getString(R.string.hotel_info_toolbar)
+        toolbar.title = ""
         setSupportActionBar(toolbar)
         toolbar.setNavigationOnClickListener {
             finish()
         }
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        topAppBar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
-            if (Math.abs(verticalOffset) == topAppBar.totalScrollRange) {
-                toolbar.title = "hotel"
-                toolbar.subtitle = "hotel"
-            }
-        })
+
     }
 
     override fun initViews() {
+        root = findViewById(R.id.root)
+        toolbar = findViewById(R.id.toolbar)
+        tabsPager = findViewById(R.id.tabs_pager)
+        tabLayout = findViewById(R.id.tab_layout)
+        mainImage = findViewById(R.id.main_image)
 
         tabsPager.adapter = TabsPagerAdapter(supportFragmentManager, this@HotelInformationActivity)
         tabLayout.setupWithViewPager(tabsPager)
@@ -88,6 +94,15 @@ class HotelInformationActivity : DaggerAppCompatActivity(), HotelInformationActi
                 tabsPager.currentItem = currentTab.position
             }
         })
+    }
+
+    override fun setViews(hotelModel: HotelModel) {
+        toolbar.title = hotelModel.name
+
+        GlideHelper.with(this@HotelInformationActivity)
+            .load(hotelModel.mainImage)
+            .error(R.drawable.ic_image_placeholder)
+            .into(mainImage)
     }
 
     override fun initListeners() {

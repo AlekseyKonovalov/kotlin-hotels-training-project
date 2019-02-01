@@ -29,7 +29,7 @@ class ContactHotelFragmentModule {
 
     @PerFragment
     @Provides
-    fun provideResourseManager(context: Context): ContactHotelFragmentResourceManager {
+    fun provideResourceManager(context: Context): ContactHotelFragmentResourceManager {
         return ContactHotelFragmentResourceManagerImpl(context.resources)
     }
 
