@@ -3,6 +3,7 @@
 
     /* Common */
     <string name="internet_error">Ошибка, попробуйте позже</string>
+    <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
 
     /* Fonts */
     <string name="sans_serif_medium" translatable="false">sans-serif-medium</string>

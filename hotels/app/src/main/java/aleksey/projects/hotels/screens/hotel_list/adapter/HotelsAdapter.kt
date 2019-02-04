@@ -10,7 +10,6 @@ import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -20,7 +19,7 @@ class HotelsAdapter(val context: Context) : RecyclerView.Adapter<HotelsAdapter.H
     private var items: MutableList<HotelModel> = mutableListOf()
     var listener: OnItemClickListener<HotelModel>? = null
 
-    override fun onCreateViewHolder(parent: ViewGroup, position: Int): HotelsViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HotelsViewHolder {
         val view = parent.inflate(R.layout.item_hotel)
         view.layoutParams =
                 ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
@@ -41,12 +40,11 @@ class HotelsAdapter(val context: Context) : RecyclerView.Adapter<HotelsAdapter.H
         notifyDataSetChanged()
     }
 
-    inner class HotelsViewHolder(val view: View) : BindedViewHolder<HotelModel>(view) {
-        private val rootView: FrameLayout = view.findViewById<View>(R.id.hotel_card) as FrameLayout
+    inner class HotelsViewHolder(view: View) : BindedViewHolder<HotelModel>(view) {
+        private val rootView: LinearLayout = view.findViewById<View>(R.id.hotel_card) as LinearLayout
 
         private val name: TextView = view.findViewById<View>(R.id.name) as TextView
         private val address: TextView = view.findViewById<View>(R.id.address) as TextView
-
         private val imageHotel: ImageView = view.findViewById<View>(R.id.image_hotel) as ImageView
 
         private val zeroStars: LinearLayout = view.findViewById<View>(R.id.zero_stars) as LinearLayout
@@ -60,11 +58,12 @@ class HotelsAdapter(val context: Context) : RecyclerView.Adapter<HotelsAdapter.H
             name.text = data.name
             address.text = data.address
 
-            GlideHelper.with(view)
+            GlideHelper.with(itemView)
                 .load(data.mainImage)
                 .error(R.drawable.ic_image_placeholder)
                 .into(imageHotel)
 
+            //fixme - add recycler view
             setStarsView(data)
         }
 
