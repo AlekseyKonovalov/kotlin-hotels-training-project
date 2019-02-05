@@ -64,10 +64,10 @@ class HotelListActivity : DaggerAppCompatActivity(), HotelListActivityView {
         root = findViewById(R.id.root)
         hotelsRecyclerView = findViewById(R.id.hotels_recycler_view)
 
-        hotelsAdapter = HotelsAdapter(this@HotelListActivity)
-        hotelsRecyclerView.adapter = hotelsAdapter
         hotelsLayoutManager = LinearLayoutManager(this@HotelListActivity)
         hotelsRecyclerView.layoutManager = hotelsLayoutManager
+        hotelsAdapter = HotelsAdapter(this@HotelListActivity)
+        hotelsRecyclerView.adapter = hotelsAdapter
     }
 
     override fun initListeners() {

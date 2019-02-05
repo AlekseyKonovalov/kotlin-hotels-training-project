@@ -6,12 +6,18 @@ import aleksey.projects.hotels.helper.GlideHelper
 import aleksey.projects.hotels.screens.common.BaseView
 import aleksey.projects.hotels.screens.hotel_list.models.HotelModel
 import aleksey.projects.hotels.view.ProgressOverlay
+import android.Manifest
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.CoordinatorLayout
+import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.Snackbar
 import android.support.design.widget.TabLayout
+import android.support.v4.app.ActivityCompat
+import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewPager
 import android.support.v7.widget.Toolbar
 import android.widget.ImageView
@@ -19,6 +25,7 @@ import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 
 private const val INTENT_HOTEL_ID = "hotel_id"
+private const val REQUEST_CALL_PHONE = 1000
 
 fun startHotelInformationActivity(context: Context, hotelId: Int) {
     val intent = Intent(context, HotelInformationActivity::class.java)
@@ -39,11 +46,14 @@ class HotelInformationActivity : DaggerAppCompatActivity(), HotelInformationActi
     lateinit var presenter: HotelInformationActivityPresenter
 
     private lateinit var root: CoordinatorLayout
-    private  lateinit var toolbar: Toolbar
+    private lateinit var toolbar: Toolbar
 
     private lateinit var tabsPager: ViewPager
     private lateinit var tabLayout: TabLayout
-    private  lateinit var mainImage: ImageView
+    private lateinit var mainImage: ImageView
+    private lateinit var callButton: FloatingActionButton
+
+    private var hotelModel: HotelModel? = null
 
     var hotelId: Int? = null
 
@@ -63,7 +73,7 @@ class HotelInformationActivity : DaggerAppCompatActivity(), HotelInformationActi
         initListeners()
         initToolbar()
 
-        hotelId?.let {  presenter.loadHotelInfo(it) }
+        hotelId?.let { presenter.loadHotelInfo(it) }
     }
 
 
@@ -83,6 +93,7 @@ class HotelInformationActivity : DaggerAppCompatActivity(), HotelInformationActi
         tabsPager = findViewById(R.id.tabs_pager)
         tabLayout = findViewById(R.id.tab_layout)
         mainImage = findViewById(R.id.main_image)
+        callButton = findViewById(R.id.call_btn)
 
         tabsPager.adapter = TabsPagerAdapter(supportFragmentManager, this@HotelInformationActivity)
         tabLayout.setupWithViewPager(tabsPager)
@@ -97,7 +108,12 @@ class HotelInformationActivity : DaggerAppCompatActivity(), HotelInformationActi
     }
 
     override fun setViews(hotelModel: HotelModel) {
+        this.hotelModel = hotelModel
         toolbar.title = hotelModel.name
+
+        hotelModel.phone?.let {
+            callButton.show()
+        } ?: callButton.hide()
 
         GlideHelper.with(this@HotelInformationActivity)
             .load(hotelModel.mainImage)
@@ -106,9 +122,27 @@ class HotelInformationActivity : DaggerAppCompatActivity(), HotelInformationActi
     }
 
     override fun initListeners() {
-
+        callButton.setOnClickListener {
+            hotelModel?.phone?.let {
+                call(it)
+            }
+        }
     }
 
+    private fun call(phoneNumber: String) {
+        val checkPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE)
+        if (checkPermission != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.CALL_PHONE),
+                REQUEST_CALL_PHONE
+            )
+        } else {
+            val callIntent = Intent(Intent.ACTION_CALL)
+            callIntent.data = Uri.parse("tel:$phoneNumber")
+            startActivity(callIntent)
+        }
+    }
 
     override fun showProgressBar() {
         progressOverlay.show()

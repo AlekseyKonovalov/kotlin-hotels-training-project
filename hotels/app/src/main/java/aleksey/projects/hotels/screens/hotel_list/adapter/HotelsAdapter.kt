@@ -47,13 +47,6 @@ class HotelsAdapter(val context: Context) : RecyclerView.Adapter<HotelsAdapter.H
         private val address: TextView = view.findViewById<View>(R.id.address) as TextView
         private val imageHotel: ImageView = view.findViewById<View>(R.id.image_hotel) as ImageView
 
-        private val zeroStars: LinearLayout = view.findViewById<View>(R.id.zero_stars) as LinearLayout
-        private val oneStars: LinearLayout = view.findViewById<View>(R.id.one_stars) as LinearLayout
-        private val twoStars: LinearLayout = view.findViewById<View>(R.id.two_stars) as LinearLayout
-        private val threeStars: LinearLayout = view.findViewById<View>(R.id.three_stars) as LinearLayout
-        private val fourStars: LinearLayout = view.findViewById<View>(R.id.four_stars) as LinearLayout
-        private val fiveStars: LinearLayout = view.findViewById<View>(R.id.five_stars) as LinearLayout
-
         override fun bind(data: HotelModel) {
             name.text = data.name
             address.text = data.address
@@ -62,39 +55,6 @@ class HotelsAdapter(val context: Context) : RecyclerView.Adapter<HotelsAdapter.H
                 .load(data.mainImage)
                 .error(R.drawable.ic_image_placeholder)
                 .into(imageHotel)
-
-            //fixme - add recycler view
-            setStarsView(data)
-        }
-
-        private fun setStarsView(data: HotelModel) {
-            zeroStars.visibility = View.GONE
-            oneStars.visibility = View.GONE
-            twoStars.visibility = View.GONE
-            threeStars.visibility = View.GONE
-            fourStars.visibility = View.GONE
-            fiveStars.visibility = View.GONE
-
-            when (data.stars) {
-                0 -> {
-                    zeroStars.visibility = View.VISIBLE
-                }
-                1 -> {
-                    oneStars.visibility = View.VISIBLE
-                }
-                2 -> {
-                    twoStars.visibility = View.VISIBLE
-                }
-                3 -> {
-                    threeStars.visibility = View.VISIBLE
-                }
-                4 -> {
-                    fourStars.visibility = View.VISIBLE
-                }
-                5 -> {
-                    fiveStars.visibility = View.VISIBLE
-                }
-            }
         }
 
         fun setOnClickListener(callback: () -> Unit) {

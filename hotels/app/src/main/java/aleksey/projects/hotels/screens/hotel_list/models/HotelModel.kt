@@ -11,6 +11,6 @@ data class HotelModel(
     @SerializedName("suites_availability") var suitesAvailability: Int?,
     @SerializedName("main_image") var mainImage: String?,
     @SerializedName("images") var images: List<String>?,
-    @SerializedName("lat") var lat: Double?,
-    @SerializedName("lon") var lon: Double?
+    @SerializedName("contacts") var contacts: String?,
+    @SerializedName("phone") var phone: String?
 )
