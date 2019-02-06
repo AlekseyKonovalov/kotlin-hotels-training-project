@@ -8,7 +8,7 @@ data class HotelModel(
     @SerializedName("address") var address: String,
     @SerializedName("stars") var stars: Int,
     @SerializedName("distance") var distance: Double?,
-    @SerializedName("suites_availability") var suitesAvailability: Int?,
+    @SerializedName("suites_availability") var suitesAvailability: String?,
     @SerializedName("main_image") var mainImage: String?,
     @SerializedName("images") var images: List<String>?,
     @SerializedName("contacts") var contacts: String?,

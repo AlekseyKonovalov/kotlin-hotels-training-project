@@ -5,6 +5,7 @@
         android:id="@+id/root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
         tools:context=".screens.hotel_information.HotelInformationActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -26,7 +27,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/material_flat"
+                    android:src="@drawable/ic_image"
                     app:layout_collapseMode="parallax"/>
 
         </android.support.design.widget.CollapsingToolbarLayout>

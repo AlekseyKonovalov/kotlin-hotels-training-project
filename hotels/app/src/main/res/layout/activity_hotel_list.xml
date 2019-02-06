@@ -6,6 +6,7 @@
         android:id="@+id/root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
         tools:context=".screens.hotel_list.HotelListActivity">
 
     <android.support.design.widget.AppBarLayout

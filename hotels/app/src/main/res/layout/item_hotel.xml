@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
              xmlns:app="http://schemas.android.com/apk/res-auto"
+             android:id="@+id/container"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
              android:layout_marginTop="5dp"
              android:layout_marginBottom="10dp"
+             android:animateLayoutChanges="true"
              android:background="@android:color/transparent">
 
     <android.support.design.card.MaterialCardView
@@ -21,9 +23,6 @@
                 android:id="@+id/hotel_card"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?android:attr/selectableItemBackgroundBorderless"
                 android:orientation="vertical">
 
             <ImageView
@@ -31,68 +30,132 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxHeight="200dp"
-                    android:src="@drawable/ic_image_placeholder"
                     android:layout_gravity="center"
                     android:adjustViewBounds="true"
-                    android:scaleType="centerCrop"/>
+                    android:scaleType="centerCrop"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackgroundBorderless"/>
 
             <LinearLayout android:layout_width="match_parent"
                           android:layout_height="wrap_content"
-                          android:padding="20dp"
+                          android:padding="10dp"
+                          android:paddingStart="20dp"
                           android:orientation="horizontal">
 
-                <ImageView android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           android:maxHeight="40dp"
-                           android:maxWidth="40dp"
-                           android:adjustViewBounds="true"
-                           android:scaleType="centerCrop"
-                           android:layout_gravity="center"
-                           android:src="@drawable/ic_image_placeholder"/>
+                <TextView
+                        android:id="@+id/name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
+                        android:textSize="16dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"/>
 
-                <LinearLayout android:layout_width="wrap_content"
-                              android:layout_height="wrap_content"
-                              android:layout_marginStart="10dp"
-                              android:orientation="vertical">
-
-                    <TextView
-                            android:id="@+id/name"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textStyle="bold"
-                            android:textSize="16dp"
-                            android:ellipsize="end"
-                            android:maxLines="1"
-                            android:text="Best Western President Hotel"/>
-
-                    <TextView
-                            android:id="@+id/address"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:textSize="12dp"
-                            android:ellipsize="end"
-                            android:maxLines="1"
-                            android:text="Best Western President Hotel"/>
-
-                </LinearLayout>
-
-                <View
-                        android:layout_width="1dp"
-                        android:layout_height="1dp"
-                        android:layout_weight="1"/>
 
                 <ImageView
+                        android:id="@+id/expand_image"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
+                        android:layout_weight="0"
                         android:padding="10dp"
                         android:src="@drawable/ic_expand_more"
-                        android:layout_gravity="center"
+                        android:layout_gravity="right"
                         android:adjustViewBounds="true"
                         android:scaleType="centerCrop"/>
 
             </LinearLayout>
 
+            <LinearLayout
+                    android:id="@+id/expand_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:orientation="vertical">
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:padding="10dp"
+                              android:paddingStart="20dp"
+                              android:orientation="horizontal">
+                    <TextView
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="right"
+                            android:textStyle="bold"
+                            android:textSize="12dp"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="Address"/>
+                    <TextView
+                            android:id="@+id/address"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingStart="30dp"
+                            android:layout_weight="1"
+                            android:layout_gravity="center"
+                            android:textStyle="bold"
+                            android:textSize="12dp"
+                            android:ellipsize="end"
+                            android:maxLines="1"/>
+                </LinearLayout>
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:padding="10dp"
+                              android:paddingStart="20dp"
+                              android:orientation="horizontal">
+                    <TextView
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="right"
+                            android:textStyle="bold"
+                            android:textSize="12dp"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="Stars"/>
+                    <TextView
+                            android:id="@+id/stars"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingStart="30dp"
+                            android:layout_weight="1"
+                            android:layout_gravity="center"
+                            android:textStyle="bold"
+                            android:textSize="12dp"
+                            android:ellipsize="end"
+                            android:maxLines="1"/>
+                </LinearLayout>
+                <LinearLayout android:layout_width="match_parent"
+                              android:layout_height="wrap_content"
+                              android:padding="10dp"
+                              android:paddingStart="20dp"
+                              android:orientation="horizontal">
+                    <TextView
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="right"
+                            android:textStyle="bold"
+                            android:textSize="12dp"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="Suites availability"/>
+                    <TextView
+                            android:id="@+id/suites_availability"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingStart="30dp"
+                            android:layout_weight="1"
+                            android:layout_gravity="center"
+                            android:textStyle="bold"
+                            android:textSize="12dp"
+                            android:ellipsize="end"
+                            android:maxLines="1"/>
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
 
     </android.support.design.card.MaterialCardView>
