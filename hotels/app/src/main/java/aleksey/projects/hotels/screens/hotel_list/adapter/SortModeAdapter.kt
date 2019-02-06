@@ -4,6 +4,7 @@ import aleksey.projects.hotels.R
 import aleksey.projects.hotels.extensions.inflate
 import aleksey.projects.hotels.screens.common.BindedViewHolder
 import aleksey.projects.hotels.screens.common.OnItemClickListener
+import aleksey.projects.hotels.screens.hotel_list.HotelListActivity
 import aleksey.projects.hotels.screens.hotel_list.models.SortModeModel
 import android.content.Context
 import android.support.v7.widget.RecyclerView
@@ -15,6 +16,7 @@ class SortModeAdapter(val context: Context) : RecyclerView.Adapter<SortModeAdapt
 
     private var items: MutableList<SortModeModel> = mutableListOf()
     var dialogItemClickListener: OnItemClickListener<SortModeModel>? = null
+    private var currentSortMode: Int? = null
 
     fun setItems(inputItems: MutableList<SortModeModel>) {
         items = inputItems
@@ -40,10 +42,21 @@ class SortModeAdapter(val context: Context) : RecyclerView.Adapter<SortModeAdapt
         private val radioButton: RadioButton = view.findViewById<View>(R.id.choice_sort_mode) as RadioButton
         override fun bind(data: SortModeModel) {
             radioButton.text = data.name
-            //todo
-            // sort mode in prefs != null  set
-            // else
-            radioButton.isChecked = data.isCurrentSortMode!=null && data.isCurrentSortMode
+            radioButton.isChecked = false
+
+            (view.context as? HotelListActivity)?.appPrefs?.getSortMode()?.let {
+                if (it >= 0) {
+                    currentSortMode = it
+                }
+            }
+
+            currentSortMode?.let {
+                if (currentSortMode == data.id) {
+                    radioButton.isChecked = true
+                }
+            } ?: run {
+                radioButton.isChecked = data.isCurrentSortMode != null && data.isCurrentSortMode
+            }
         }
 
         fun setClickListener(callback: () -> Unit) {

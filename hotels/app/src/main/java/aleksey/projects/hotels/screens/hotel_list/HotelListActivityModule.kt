@@ -2,6 +2,7 @@ package aleksey.projects.hotels.screens.hotel_list
 
 import aleksey.projects.hotels.data.api.Api
 import aleksey.projects.hotels.data.db.AppDatabase
+import aleksey.projects.hotels.data.prefs.AppPrefs
 import aleksey.projects.hotels.di.PerActivity
 import android.content.Context
 import dagger.Module
@@ -15,9 +16,10 @@ class HotelListActivityModule {
     fun providePresenter(
         activity: HotelListActivity,
         interactor: HotelListActivityInteractor,
-        resourceManager: HotelListActivityResourceManager
+        resourceManager: HotelListActivityResourceManager,
+        prefs: AppPrefs
     ): HotelListActivityPresenter {
-        val presenter = HotelListActivityPresenterImpl(interactor, resourceManager)
+        val presenter = HotelListActivityPresenterImpl(interactor, resourceManager, prefs)
         activity.lifecycle.addObserver(presenter)
         presenter.attachView(activity)
         return presenter

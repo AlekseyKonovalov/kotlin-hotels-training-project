@@ -22,6 +22,7 @@ class NavigationFragment : BottomSheetDialogFragment(), NavigationFragmentView {
 
     private lateinit var itemSettings: TextView
     private lateinit var itemWriteToDeveloper: TextView
+    private lateinit var itemAboutApp: TextView
 
     override fun onAttach(context: Context?) {
         AndroidSupportInjection.inject(this)
@@ -48,6 +49,7 @@ class NavigationFragment : BottomSheetDialogFragment(), NavigationFragmentView {
         view?.let {
             itemSettings = it.findViewById(R.id.item_settings)
             itemWriteToDeveloper = it.findViewById(R.id.item_write_to_developer)
+            itemAboutApp = it.findViewById(R.id.item_about_application)
         }
     }
 

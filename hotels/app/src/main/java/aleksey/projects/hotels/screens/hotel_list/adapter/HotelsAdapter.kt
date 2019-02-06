@@ -37,8 +37,8 @@ class HotelsAdapter(val context: Context) : RecyclerView.Adapter<HotelsAdapter.H
 
     override fun getItemCount(): Int = items.size
 
-    fun setItems(items: List<HotelModel>) {
-        this.items.addAll(items)
+    fun setItems(items: MutableList<HotelModel>) {
+        this.items = items
         notifyDataSetChanged()
     }
 
