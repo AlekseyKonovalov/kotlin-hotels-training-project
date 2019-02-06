@@ -1,26 +1,32 @@
  [	
   {
 		"id": 0,
-		"name": "number of stars ascending"
+		"name": "number of stars ascending",
+		"isCurrentSortMode": true
     },
 	{
 		"id": 1,
-		"name": "number of stars descending"
+		"name": "number of stars descending",
+		"isCurrentSortMode": false
     },
       {
 		"id": 2,
-		"name": "distance of stars ascending"
+		"name": "distance of stars ascending",
+		"isCurrentSortMode": false
     },
 	{
 		"id": 3,
-		"name": "distance of stars descending"
+		"name": "distance of stars descending",
+		"isCurrentSortMode": false
     },  
     {
 		"id": 4,
-		"name": "suites availability of stars ascending"
+		"name": "suites availability of stars ascending",
+		"isCurrentSortMode": false
     },
 	{
 		"id": 5,
-		"name": "suites availability of stars descending"
+		"name": "suites availability of stars descending",
+		"isCurrentSortMode": false
     }
 ]
