@@ -82,7 +82,14 @@ class HotelListActivityPresenterImpl(
     }
 
     private fun sortItems(sortModeId: Int, items: MutableList<HotelModel>): List<HotelModel> {
-        //todo added sort
-        return mutableListOf()
+        return when (sortModeId) {
+            0 -> items.sortedBy { it.stars }
+            1 -> items.sortedBy { it.stars }.reversed()
+            2 -> items.sortedBy { it.distance }
+            3 -> items.sortedBy { it.distance }.reversed()
+            4 -> items.sortedBy { it.suitesAvailability?.toInt() }
+            5 -> items.sortedBy { it.suitesAvailability?.toInt() }.reversed()
+            else -> items.sortedBy { it.stars }
+        }
     }
 }
