@@ -7,16 +7,17 @@ import aleksey.projects.hotels.screens.common.OnItemClickListener
 import aleksey.projects.hotels.screens.hotel_information.startHotelInformationActivity
 import aleksey.projects.hotels.screens.hotel_list.adapter.HotelsAdapter
 import aleksey.projects.hotels.screens.hotel_list.models.HotelModel
+import aleksey.projects.hotels.screens.hotel_list.navigation.NavigationFragment
 import aleksey.projects.hotels.view.ProgressOverlay
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.design.bottomappbar.BottomAppBar
 import android.support.design.widget.CoordinatorLayout
 import android.support.design.widget.Snackbar
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import dagger.android.support.DaggerAppCompatActivity
-import kotlinx.android.synthetic.main.activity_hotel_list.*
 import javax.inject.Inject
 
 fun startHotelListActivity(context: Context) {
@@ -31,6 +32,8 @@ interface HotelListActivityView : BaseView {
     fun hideProgressBar()
 }
 
+private const val TAG_BOTTOM_NAVIGATION_FRAGMENT = "bottom_navigation_menu"
+
 class HotelListActivity : DaggerAppCompatActivity(), HotelListActivityView {
 
     @Inject
@@ -38,6 +41,7 @@ class HotelListActivity : DaggerAppCompatActivity(), HotelListActivityView {
     private lateinit var hotelsAdapter: HotelsAdapter
 
     private lateinit var root: CoordinatorLayout
+    private lateinit var bottomAppBar: BottomAppBar
     private lateinit var hotelsRecyclerView: RecyclerView
     private lateinit var hotelsLayoutManager: RecyclerView.LayoutManager
 
@@ -56,13 +60,14 @@ class HotelListActivity : DaggerAppCompatActivity(), HotelListActivityView {
     }
 
     override fun initToolbar() {
-        toolbar.title = "Hotels"
-        setSupportActionBar(toolbar)
+
     }
 
     override fun initViews() {
         root = findViewById(R.id.root)
         hotelsRecyclerView = findViewById(R.id.hotels_recycler_view)
+        bottomAppBar = findViewById(R.id.bottom_app_bar)
+        bottomAppBar.inflateMenu(R.menu.hotel_list_bottom_app_bar)
 
         hotelsLayoutManager = LinearLayoutManager(this@HotelListActivity)
         hotelsRecyclerView.layoutManager = hotelsLayoutManager
@@ -75,6 +80,19 @@ class HotelListActivity : DaggerAppCompatActivity(), HotelListActivityView {
             override fun onClick(data: HotelModel) {
                 startHotelInformationActivity(this@HotelListActivity, data.hotelId)
             }
+        }
+
+        bottomAppBar.setNavigationOnClickListener {
+            NavigationFragment().show(supportFragmentManager, TAG_BOTTOM_NAVIGATION_FRAGMENT)
+        }
+
+        bottomAppBar.setOnMenuItemClickListener { menuItem ->
+            /*            when (menuItem.itemId) {
+                            R.id.item_search ->
+                            R.id.item_sort ->
+                            R.id.item_more_vert ->
+                        }*/
+            return@setOnMenuItemClickListener true
         }
     }
 
