@@ -11,6 +11,8 @@ import timber.log.Timber
 
 interface HotelListActivityPresenter: BasePresenter<HotelListActivityView> {
     fun loadHotels()
+    fun onSortModeSelected(sortModeId: Int)
+    fun getSortModes()
 }
 
 class HotelListActivityPresenterImpl(
@@ -48,4 +50,24 @@ class HotelListActivityPresenterImpl(
             )
     }
 
+    override fun getSortModes() {
+        view?.showProgressBar()
+        disposables += interactor.getSortModes()
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { response ->
+                    view?.hideProgressBar()
+                    view?.showSortModeSelector(response)
+                },
+                { error ->
+                    Timber.e(error)
+                    view?.hideProgressBar()
+                    view?.showSnackbar(resourceManager.getInternetError())
+                }
+            )
+    }
+
+    override fun onSortModeSelected(sortModeId: Int) {
+
+    }
 }

@@ -6,17 +6,23 @@ import aleksey.projects.hotels.screens.common.BaseView
 import aleksey.projects.hotels.screens.common.OnItemClickListener
 import aleksey.projects.hotels.screens.hotel_information.startHotelInformationActivity
 import aleksey.projects.hotels.screens.hotel_list.adapter.HotelsAdapter
+import aleksey.projects.hotels.screens.hotel_list.adapter.SortModeAdapter
 import aleksey.projects.hotels.screens.hotel_list.models.HotelModel
+import aleksey.projects.hotels.screens.hotel_list.models.SortModeModel
 import aleksey.projects.hotels.screens.hotel_list.navigation.NavigationFragment
 import aleksey.projects.hotels.view.ProgressOverlay
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.bottomappbar.BottomAppBar
+import android.support.design.widget.BottomSheetDialog
 import android.support.design.widget.CoordinatorLayout
 import android.support.design.widget.Snackbar
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.view.LayoutInflater
+import android.widget.ImageView
+import android.widget.TextView
 import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 
@@ -30,6 +36,7 @@ interface HotelListActivityView : BaseView {
     fun showSnackbar(message: String)
     fun showProgressBar()
     fun hideProgressBar()
+    fun showSortModeSelector(params: List<SortModeModel>)
 }
 
 private const val TAG_BOTTOM_NAVIGATION_FRAGMENT = "bottom_navigation_menu"
@@ -87,12 +94,40 @@ class HotelListActivity : DaggerAppCompatActivity(), HotelListActivityView {
         }
 
         bottomAppBar.setOnMenuItemClickListener { menuItem ->
-            /*            when (menuItem.itemId) {
-                            R.id.item_search ->
-                            R.id.item_sort ->
-                            R.id.item_more_vert ->
-                        }*/
+            when (menuItem.itemId) {
+                /*   R.id.item_search -> // todo */
+                R.id.item_sort -> presenter.getSortModes()
+                /*     R.id.item_more_vert -> showSortModeSelector() // todo*/
+            }
             return@setOnMenuItemClickListener true
+        }
+    }
+
+
+    override fun showSortModeSelector(params: List<SortModeModel>) {
+        val view = LayoutInflater.from(this@HotelListActivity).inflate(R.layout.bottom_sheet_sort_modes, null)
+        val dialog = BottomSheetDialog(this@HotelListActivity)
+
+        val dialogTitle = view.findViewById(R.id.title) as TextView
+        dialogTitle.text = "Select sort mode"
+        val dialogItems = view.findViewById(R.id.items) as RecyclerView
+        val dialogCloseButton = view.findViewById(R.id.close) as ImageView
+        dialogCloseButton.setOnClickListener {
+            dialog.dismiss()
+        }
+        val dialogItemsAdapter = SortModeAdapter(this@HotelListActivity)
+        dialogItems.adapter = dialogItemsAdapter
+
+        params?.let {
+            dialogItemsAdapter.setItems(it.toMutableList())
+            dialogItemsAdapter.dialogItemClickListener = object : OnItemClickListener<SortModeModel> {
+                override fun onClick(item: SortModeModel) {
+                    presenter.onSortModeSelected(item.id)
+                    dialog.dismiss()
+                }
+            }
+            dialog.setContentView(view)
+            dialog.show()
         }
     }
 
