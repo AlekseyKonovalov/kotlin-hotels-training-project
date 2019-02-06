@@ -11,22 +11,22 @@
     },
       {
 		"id": 2,
-		"name": "distance of stars ascending",
+		"name": "distance ascending",
 		"isCurrentSortMode": false
     },
 	{
 		"id": 3,
-		"name": "distance of stars descending",
+		"name": "distance descending",
 		"isCurrentSortMode": false
     },  
     {
 		"id": 4,
-		"name": "suites availability of stars ascending",
+		"name": "suites availability ascending",
 		"isCurrentSortMode": false
     },
 	{
 		"id": 5,
-		"name": "suites availability of stars descending",
+		"name": "suites availability descending",
 		"isCurrentSortMode": false
     }
 ]
