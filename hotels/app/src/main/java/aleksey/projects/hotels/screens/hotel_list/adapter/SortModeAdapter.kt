@@ -55,7 +55,7 @@ class SortModeAdapter(val context: Context) : RecyclerView.Adapter<SortModeAdapt
                     radioButton.isChecked = true
                 }
             } ?: run {
-                radioButton.isChecked = data.isCurrentSortMode != null && data.isCurrentSortMode
+                radioButton.isChecked = data.isCurrentSortMode
             }
         }
 

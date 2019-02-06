@@ -45,6 +45,7 @@ class HotelsAdapter(val context: Context) : RecyclerView.Adapter<HotelsAdapter.H
     inner class HotelsViewHolder(view: View) : BindedViewHolder<HotelModel>(view) {
         private val container: FrameLayout = view.findViewById<View>(R.id.container) as FrameLayout
         private val name: TextView = view.findViewById<View>(R.id.name) as TextView
+        private val distance: TextView = view.findViewById<View>(R.id.distance) as TextView
         private val imageHotel: ImageView = view.findViewById<View>(R.id.image_hotel) as ImageView
         private val address: TextView = view.findViewById<View>(R.id.address) as TextView
         private val stars: TextView = view.findViewById<View>(R.id.stars) as TextView
@@ -59,6 +60,7 @@ class HotelsAdapter(val context: Context) : RecyclerView.Adapter<HotelsAdapter.H
             name.text = data.name
             address.text = data.address
             stars.text = data.stars.toString()
+            distance.text = data.distance.toString()
             suitesAvailability.text = data.suitesAvailability
 
             GlideHelper.with(itemView)
