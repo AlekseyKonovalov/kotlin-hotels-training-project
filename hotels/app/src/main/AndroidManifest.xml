@@ -14,7 +14,7 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity
-                android:name="aleksey.projects.hotels.screens.hotel_list.HotelListActivity"
+                android:name=".screens.hotel_list.HotelListActivity"
                 android:launchMode="singleTask"
                 android:screenOrientation="portrait">
             <intent-filter>
@@ -25,6 +25,15 @@
         </activity>
 
         <activity android:name=".screens.hotel_information.HotelInformationActivity"
+                  android:launchMode="singleTask"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".screens.about_app.AboutAppActivity"
+                  android:launchMode="singleTask"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".screens.settings.SettingsActivity"
+                  android:launchMode="singleTask"
+                  android:screenOrientation="portrait"/>
+        <activity android:name=".screens.write_to_developer.WriteToDeveloperActivity"
                   android:launchMode="singleTask"
                   android:screenOrientation="portrait"/>
     </application>
