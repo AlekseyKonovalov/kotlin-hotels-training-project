@@ -1,7 +1,10 @@
 package aleksey.projects.hotels.screens.hotel_list.navigation
 
 import aleksey.projects.hotels.R
+import aleksey.projects.hotels.screens.about_app.startAboutAppActivity
 import aleksey.projects.hotels.screens.common.BaseView
+import aleksey.projects.hotels.screens.settings.startSettingsActivity
+import aleksey.projects.hotels.screens.write_to_developer.startWriteToDeveloperActivity
 import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.BottomSheetDialogFragment
@@ -55,10 +58,13 @@ class NavigationFragment : BottomSheetDialogFragment(), NavigationFragmentView {
 
     override fun initListeners() {
         itemSettings.setOnClickListener {
-
+            startSettingsActivity(requireContext())
         }
         itemWriteToDeveloper.setOnClickListener {
-
+            startWriteToDeveloperActivity(requireContext())
+        }
+        itemAboutApp.setOnClickListener {
+            startAboutAppActivity(requireContext())
         }
     }
 

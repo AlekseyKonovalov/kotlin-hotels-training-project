@@ -71,10 +71,12 @@ class HotelsAdapter(val context: Context) : RecyclerView.Adapter<HotelsAdapter.H
             expandImage.setOnClickListener {
                 if (isClickOnExpandImage) {
                     isClickOnExpandImage = false
+                    TransitionManager.beginDelayedTransition(container)
                     expandInfo.visibility = View.GONE
                     expandImage.setImageResource(R.drawable.ic_expand_more)
                 } else {
                     isClickOnExpandImage = true
+                    TransitionManager.beginDelayedTransition(container)
                     expandInfo.visibility = View.VISIBLE
                     expandImage.setImageResource(R.drawable.ic_expand_less)
                 }

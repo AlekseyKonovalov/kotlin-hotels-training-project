@@ -1,4 +1,4 @@
-package aleksey.projects.hotels.screens.about_app
+package aleksey.projects.hotels.screens.write_to_developer
 
 import aleksey.projects.hotels.R
 import aleksey.projects.hotels.screens.common.BaseView
@@ -8,23 +8,23 @@ import android.os.Bundle
 import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 
-fun startAboutAppActivity(context: Context) {
-    val intent = Intent(context, AboutAppActivity::class.java)
+fun startWriteToDeveloperActivity(context: Context) {
+    val intent = Intent(context, WriteToDeveloperActivity::class.java)
     context.startActivity(intent)
 }
 
-interface  AboutAppActivityView: BaseView{
+interface WriteToDeveloperActivityView : BaseView {
 
 }
 
-class AboutAppActivity: DaggerAppCompatActivity(), AboutAppActivityView{
+class WriteToDeveloperActivity : DaggerAppCompatActivity(), WriteToDeveloperActivityView {
 
     @Inject
-    lateinit var presenter: AboutAppActivityPresenter
+    lateinit var presenter: WriteToDeveloperActivityPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_about_app)
+        setContentView(R.layout.activity_settings)
 
         initViews()
         initListeners()
