@@ -1,11 +1,13 @@
 package aleksey.projects.hotels.screens.hotel_list
 
+import aleksey.projects.hotels.data.db.entity.Hotel
 import aleksey.projects.hotels.data.prefs.AppPrefs
 import aleksey.projects.hotels.screens.common.BasePresenter
 import aleksey.projects.hotels.screens.hotel_list.models.HotelModel
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleObserver
 import android.arch.lifecycle.OnLifecycleEvent
+import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.plusAssign
@@ -41,6 +43,22 @@ class HotelListActivityPresenterImpl(
         view?.showProgressBar()
         disposables += interactor.getHotels()
             .observeOn(AndroidSchedulers.mainThread())
+            .flatMap { hotelList ->
+
+                hotelList.forEach {
+                    val hotel = Hotel(
+                        hotelId = it.hotelId,
+                        name = it.name,
+                        address = it.address,
+                        stars = it.stars,
+                        distance = it.distance,
+                        suitesAvailability = it.suitesAvailability?.toInt(),
+                        mainImage = it.mainImage
+                    )
+                    interactor.setHotelsInDB(hotel)
+                }
+                Observable.just(hotelList)
+            }
             .subscribe(
                 { response ->
                     view?.hideProgressBar()

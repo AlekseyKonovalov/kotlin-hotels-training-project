@@ -2,14 +2,18 @@ package aleksey.projects.hotels.screens.hotel_list
 
 import aleksey.projects.hotels.data.api.Api
 import aleksey.projects.hotels.data.db.AppDatabase
+import aleksey.projects.hotels.data.db.entity.Hotel
 import aleksey.projects.hotels.screens.hotel_list.models.HotelModel
 import aleksey.projects.hotels.screens.hotel_list.models.SortModeModel
+import io.reactivex.Completable
 import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 interface HotelListActivityInteractor {
     fun getHotels(): Observable<List<HotelModel>>
     fun getSortModes(): Observable<List<SortModeModel>>
+    fun setHotelsInDB(hotel: Hotel): Completable
 }
 
 class HotelListActivityInteractorImpl(val api: Api, val db: AppDatabase) : HotelListActivityInteractor {
@@ -21,5 +25,11 @@ class HotelListActivityInteractorImpl(val api: Api, val db: AppDatabase) : Hotel
     override fun getSortModes(): Observable<List<SortModeModel>> {
         return api.getSortModes()
             .subscribeOn(Schedulers.io())
+    }
+
+    override fun setHotelsInDB(hotel: Hotel): Completable {
+        return Completable.fromCallable { db.hotelDao().insert(hotel) }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
     }
 }

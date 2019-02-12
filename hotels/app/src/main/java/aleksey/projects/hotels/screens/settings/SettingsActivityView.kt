@@ -5,6 +5,8 @@ import aleksey.projects.hotels.screens.common.BaseView
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.design.widget.CoordinatorLayout
+import android.widget.Toolbar
 import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 
@@ -21,6 +23,8 @@ class SettingsActivity : DaggerAppCompatActivity(), SettingsActivityView {
 
     @Inject
     lateinit var presenter: SettingsActivityPresenter
+    private lateinit var root: CoordinatorLayout
+    private lateinit var toolbar: Toolbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,11 +36,12 @@ class SettingsActivity : DaggerAppCompatActivity(), SettingsActivityView {
     }
 
     override fun initToolbar() {
-
+        toolbar.title = "Settings"
     }
 
     override fun initViews() {
-
+        root = findViewById(R.id.root)
+        toolbar = findViewById(R.id.toolbar)
     }
 
     override fun initListeners() {
