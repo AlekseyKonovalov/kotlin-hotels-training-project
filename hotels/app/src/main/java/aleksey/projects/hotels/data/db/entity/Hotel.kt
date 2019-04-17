@@ -8,7 +8,7 @@ import android.arch.persistence.room.PrimaryKey
 data class Hotel(
     @PrimaryKey
     @ColumnInfo
-    var hotelId: Int,
+    var hotelId: String,
     @ColumnInfo
     var name: String,
     @ColumnInfo
@@ -20,5 +20,7 @@ data class Hotel(
     @ColumnInfo
     var suitesAvailability: Int?,
     @ColumnInfo
-    var mainImage: String?
+    var mainImage: String?,
+    @ColumnInfo
+    var description: String?
 )

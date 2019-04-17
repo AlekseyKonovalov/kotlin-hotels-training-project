@@ -21,9 +21,9 @@ interface HotelListActivityPresenter : BasePresenter<HotelListActivityView> {
 }
 
 class HotelListActivityPresenterImpl(
-    private val interactor: HotelListActivityInteractor,
-    private val resourceManager: HotelListActivityResourceManager,
-    private val prefs: AppPrefs
+        private val interactor: HotelListActivityInteractor,
+        private val resourceManager: HotelListActivityResourceManager,
+        private val prefs: AppPrefs
 ) : HotelListActivityPresenter, LifecycleObserver {
 
     private var view: HotelListActivityView? = null
@@ -39,54 +39,86 @@ class HotelListActivityPresenterImpl(
         this.view = null
     }
 
+    private fun mapToHotelsModel(hotelsFromDB: List<Hotel>): MutableList<HotelModel> {
+        val hotelModelList: MutableList<HotelModel> = mutableListOf()
+        hotelsFromDB.forEach {
+            val hotel = HotelModel(
+                    hotelId = it.hotelId,
+                    name = it.name,
+                    address = it.address,
+                    stars = it.stars,
+                    distance = it.distance,
+                    suitesAvailability = it.suitesAvailability?.toString(),
+                    mainImage = it.mainImage,
+                    description = it.description
+            )
+            hotelModelList.add(hotel)
+        }
+        return hotelModelList
+    }
+
     override fun loadHotels() {
         view?.showProgressBar()
-        disposables += interactor.getHotels()
-            .observeOn(AndroidSchedulers.mainThread())
-            .flatMap { hotelList ->
+        if (!prefs.getUseInternetMode()) {
+            disposables += interactor.getHotelsFromDB()
+                    .subscribe(
+                            {
+                                view?.hideProgressBar()
+                                view?.submitHotelsItems(mapToHotelsModel(it))
+                            },
+                            {
+                                Timber.e(it)
+                                view?.hideProgressBar()
+                            })
+        } else {
+            disposables += interactor.getHotels()
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .flatMap { hotelList ->
 
-                hotelList.forEach {
-                    val hotel = Hotel(
-                        hotelId = it.hotelId,
-                        name = it.name,
-                        address = it.address,
-                        stars = it.stars,
-                        distance = it.distance,
-                        suitesAvailability = it.suitesAvailability?.toInt(),
-                        mainImage = it.mainImage
+                        hotelList.forEach {
+                            val hotel = Hotel(
+                                    hotelId = it.hotelId,
+                                    name = it.name,
+                                    address = it.address,
+                                    stars = it.stars,
+                                    distance = it.distance,
+                                    suitesAvailability = it.suitesAvailability?.toInt(),
+                                    mainImage = it.mainImage,
+                                    description = it.description
+                            )
+                            interactor.setHotelsInDB(hotel)
+                        }
+                        Observable.just(hotelList)
+                    }
+                    .subscribe(
+                            { response ->
+                                view?.hideProgressBar()
+                                view?.submitHotelsItems(response)
+                            },
+                            { error ->
+                                Timber.e(error)
+                                view?.hideProgressBar()
+                                view?.showSnackbar(resourceManager.getInternetError())
+                            }
                     )
-                    interactor.setHotelsInDB(hotel)
-                }
-                Observable.just(hotelList)
-            }
-            .subscribe(
-                { response ->
-                    view?.hideProgressBar()
-                    view?.submitHotelsItems(response)
-                },
-                { error ->
-                    Timber.e(error)
-                    view?.hideProgressBar()
-                    view?.showSnackbar(resourceManager.getInternetError())
-                }
-            )
+        }
     }
 
     override fun getSortModes() {
         view?.showProgressBar()
         disposables += interactor.getSortModes()
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                { response ->
-                    view?.hideProgressBar()
-                    view?.showSortModeSelector(response)
-                },
-                { error ->
-                    Timber.e(error)
-                    view?.hideProgressBar()
-                    view?.showSnackbar(resourceManager.getInternetError())
-                }
-            )
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        { response ->
+                            view?.hideProgressBar()
+                            view?.showSortModeSelector(response)
+                        },
+                        { error ->
+                            Timber.e(error)
+                            view?.hideProgressBar()
+                            view?.showSnackbar(resourceManager.getInternetError())
+                        }
+                )
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)

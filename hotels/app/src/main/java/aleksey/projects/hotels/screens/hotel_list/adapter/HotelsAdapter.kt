@@ -52,6 +52,7 @@ class HotelsAdapter(val context: Context) : RecyclerView.Adapter<HotelsAdapter.H
         private val suitesAvailability: TextView = view.findViewById<View>(R.id.suites_availability) as TextView
         private val expandImage: ImageView = view.findViewById<View>(R.id.expand_image) as ImageView
         private val expandInfo: LinearLayout = view.findViewById<View>(R.id.expand_info) as LinearLayout
+        private val hotelInfoPanel: LinearLayout = view.findViewById<View>(R.id.hotel_info_panel) as LinearLayout
 
         private var isClickOnExpandImage = false
 
@@ -68,7 +69,7 @@ class HotelsAdapter(val context: Context) : RecyclerView.Adapter<HotelsAdapter.H
                 .error(R.drawable.ic_broken_image)
                 .into(imageHotel)
 
-            expandImage.setOnClickListener {
+            hotelInfoPanel.setOnClickListener {
                 if (isClickOnExpandImage) {
                     isClickOnExpandImage = false
                     TransitionManager.beginDelayedTransition(container)

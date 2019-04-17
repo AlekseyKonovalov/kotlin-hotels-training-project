@@ -1,5 +1,6 @@
 package aleksey.projects.hotels.app
 
+import com.facebook.stetho.Stetho
 import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
 import timber.log.Timber
@@ -19,6 +20,7 @@ class App : DaggerApplication() {
         Timber.plant(Timber.DebugTree())
 
         initGlideTask.init()
+        Stetho.initializeWithDefaults(this)
     }
 
 }

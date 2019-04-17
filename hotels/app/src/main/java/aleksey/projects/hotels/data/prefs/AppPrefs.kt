@@ -4,6 +4,7 @@ import android.content.Context
 
 private const val PREF_APP_CONFIG = "app_config"
 private const val PREF_SORT_MODE = "sort_mode"
+private const val PREF_USE_INTERNET = "use_internet"
 
 class AppPrefs(context: Context) {
 
@@ -15,8 +16,8 @@ class AppPrefs(context: Context) {
 
     fun saveSortMode(sortMode: Int) {
         sharedPreferences.edit()
-            .putInt(PREF_SORT_MODE, sortMode)
-            .apply()
+                .putInt(PREF_SORT_MODE, sortMode)
+                .apply()
     }
 
     fun getSortMode(): Int {
@@ -25,6 +26,21 @@ class AppPrefs(context: Context) {
 
     fun removeSortMode() {
         sharedPreferences.edit().remove(PREF_SORT_MODE).apply()
+    }
+
+
+    fun saveUseInternetMode(mode: Boolean) {
+        sharedPreferences.edit()
+                .putBoolean(PREF_USE_INTERNET, mode)
+                .apply()
+    }
+
+    fun getUseInternetMode(): Boolean {
+        return sharedPreferences.getBoolean(PREF_USE_INTERNET, true)
+    }
+
+    fun removeUseInternetMode() {
+        sharedPreferences.edit().remove(PREF_USE_INTERNET).apply()
     }
 
 }

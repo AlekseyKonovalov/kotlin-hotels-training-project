@@ -27,7 +27,7 @@ import javax.inject.Inject
 private const val INTENT_HOTEL_ID = "hotel_id"
 private const val REQUEST_CALL_PHONE = 1000
 
-fun startHotelInformationActivity(context: Context, hotelId: Int) {
+fun startHotelInformationActivity(context: Context, hotelId: String) {
     val intent = Intent(context, HotelInformationActivity::class.java)
     intent.putExtra(INTENT_HOTEL_ID, hotelId)
     context.startActivity(intent)
@@ -55,7 +55,7 @@ class HotelInformationActivity : DaggerAppCompatActivity(), HotelInformationActi
 
     private var hotelModel: HotelModel? = null
 
-    var hotelId: Int? = null
+    var hotelId: String? = null
 
     private val progressOverlay: ProgressOverlay by lazy {
         ProgressOverlay(this.root)
@@ -66,7 +66,7 @@ class HotelInformationActivity : DaggerAppCompatActivity(), HotelInformationActi
         setContentView(R.layout.activity_hotel_information)
 
         if (intent.hasExtra(INTENT_HOTEL_ID)) {
-            hotelId = intent.getIntExtra(INTENT_HOTEL_ID, -1)
+            hotelId = intent.getStringExtra(INTENT_HOTEL_ID)
         }
 
         initViews()

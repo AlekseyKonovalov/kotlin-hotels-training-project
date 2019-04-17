@@ -6,7 +6,8 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.CoordinatorLayout
-import android.widget.Toolbar
+import android.support.v7.widget.Toolbar
+import android.widget.Switch
 import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 
@@ -25,6 +26,7 @@ class SettingsActivity : DaggerAppCompatActivity(), SettingsActivityView {
     lateinit var presenter: SettingsActivityPresenter
     private lateinit var root: CoordinatorLayout
     private lateinit var toolbar: Toolbar
+    private lateinit var useInternetSwitch: Switch
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,10 +44,13 @@ class SettingsActivity : DaggerAppCompatActivity(), SettingsActivityView {
     override fun initViews() {
         root = findViewById(R.id.root)
         toolbar = findViewById(R.id.toolbar)
+        useInternetSwitch = findViewById(R.id.use_internet)
     }
 
     override fun initListeners() {
-
+        useInternetSwitch.setOnCheckedChangeListener { _, isChecked ->
+            presenter.setUseInternetMode(isChecked)
+        }
     }
 
 }

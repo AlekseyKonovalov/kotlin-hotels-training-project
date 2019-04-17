@@ -1,0 +1,65 @@
+ [
+	{
+		"id": 40611,
+		"name": "Ridens Spa",
+		"address": "250 West 77th Street, Manhattan",
+		"stars": 0,
+		"distance": 100.0,
+		"suites_availability": "100",		
+		"main_image": "https://raw.githubusercontent.com/AlekseyKonovalov/kotlin-hotels-training-project/master/api/media/main-1623064_640.jpg"
+	},
+	{
+		"id": 80899,
+		"name": "Crystal Hotel Bodrum All Inclusive",
+		"address": "69 West 38th Street",
+		"stars": 1,
+		"distance": 99.9,
+		"suites_availability": "24",
+		"main_image": "https://raw.githubusercontent.com/AlekseyKonovalov/kotlin-hotels-training-project/master/api/media/main-1831072_640.jpg"
+	},
+	{
+		"id": 13100,
+		"name": "Best Western President Hotel",
+		"address": "234 West 48th Street",
+		"stars": 2,
+		"distance": 13.10,
+		"suites_availability": "0",
+		"main_image": "https://raw.githubusercontent.com/AlekseyKonovalov/kotlin-hotels-training-project/master/api/media/main-alley-984005_640.jpg"
+	},
+	{
+		"id": 22470,
+		"name": "Royal Comfort Hotel",
+		"address": "215 West 94th Street",
+		"stars": 3,
+		"distance": 999.9,
+		"suites_availability": "15",
+		"main_image": "https://raw.githubusercontent.com/AlekseyKonovalov/kotlin-hotels-training-project/master/api/media/main-arab-2624317_640.jpg"
+	},
+	{
+		"id": 85862,
+		"name": "Hilton Garden Inn Yalova",
+		"address": "210 W. 55 STREET, NEW YORK NY 10019, UNITED STATES",
+		"stars": 3,
+		"distance": 554.4,
+		"suites_availability": "42",
+		"main_image": "https://raw.githubusercontent.com/AlekseyKonovalov/kotlin-hotels-training-project/master/api/media/main-arab-690768_640.jpg"
+	},
+	{
+		"id": 313499,
+		"name": "Mirart Hotel Boutique & SPA Yalova",
+		"address": "355 West 16th Street",
+		"stars": 4,
+		"distance": 716.06,
+		"suites_availability": "232",
+		"main_image": "https://raw.githubusercontent.com/AlekseyKonovalov/kotlin-hotels-training-project/master/api/media/main-architecture-1846684_640.jpg"
+	},
+	{
+		 "id": 13370,
+		 "name": "D-Resort Gocek Special Category",
+		 "address": "250 East 50th Street",
+		 "stars": 5,
+		 "distance": 13.10,
+		 "suites_availability": "94",
+		 "main_image": "https://raw.githubusercontent.com/AlekseyKonovalov/kotlin-hotels-training-project/master/api/media/main-barn-1364280_640.jpg"
+	}
+]

@@ -27,7 +27,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_image"
                     app:layout_collapseMode="parallax"/>
 
         </android.support.design.widget.CollapsingToolbarLayout>
@@ -66,12 +65,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
-            android:layout_margin="40dp"
+            android:layout_margin="20dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             app:backgroundTint="@color/colorSecondary"
             android:clickable="true"
             android:focusable="true"
-            app:fabCustomSize="60dp"
+            app:fabCustomSize="50dp"
             app:fabSize="auto"
             app:maxImageSize="30dp"
             app:useCompatPadding="true"

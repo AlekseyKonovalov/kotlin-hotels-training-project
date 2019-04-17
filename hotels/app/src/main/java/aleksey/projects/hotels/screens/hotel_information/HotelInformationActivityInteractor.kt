@@ -7,11 +7,11 @@ import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 
 interface HotelInformationActivityInteractor{
-    fun loadHotelInfo(hotelId: Int): Observable<HotelModel>
+    fun loadHotelInfo(hotelId: String): Observable<HotelModel>
 }
 
 class HotelInformationActivityInteractorImpl(val api: Api, val db: AppDatabase) : HotelInformationActivityInteractor{
-    override fun loadHotelInfo(hotelId: Int): Observable<HotelModel> {
+    override fun loadHotelInfo(hotelId: String): Observable<HotelModel> {
         return api.getHotelInformation(hotelId)
             .subscribeOn(Schedulers.io())
     }

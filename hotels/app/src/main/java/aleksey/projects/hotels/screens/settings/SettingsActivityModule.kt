@@ -2,6 +2,7 @@ package aleksey.projects.hotels.screens.settings
 
 import aleksey.projects.hotels.data.api.Api
 import aleksey.projects.hotels.data.db.AppDatabase
+import aleksey.projects.hotels.data.prefs.AppPrefs
 import aleksey.projects.hotels.di.PerActivity
 import android.content.Context
 import dagger.Module
@@ -24,8 +25,8 @@ class SettingsActivityModule {
 
     @PerActivity
     @Provides
-    fun provideInteractor(api: Api, db: AppDatabase): SettingsActivityInteractor {
-        return SettingsActivityInteractorImpl(api, db)
+    fun provideInteractor(api: Api, db: AppDatabase, prefs: AppPrefs): SettingsActivityInteractor {
+        return SettingsActivityInteractorImpl(api, db, prefs)
     }
 
     @PerActivity

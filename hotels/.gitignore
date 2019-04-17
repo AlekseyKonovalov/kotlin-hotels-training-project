@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Built application files
 *.apk
 *.ap_
@@ -71,3 +72,11 @@ hostels/gradlew
 hostels/gradlew.bat
 hostels/settings.gradle
 hostels/app/proguard-rules.pro
+=======
+
+*.bat
+hotels/gradlew
+hotels/gradle.properties
+hotels/gradle/wrapper/gradle-wrapper.jar
+hotels/gradle/wrapper/gradle-wrapper.properties
+>>>>>>> 60d028eaa213cee1a437476f685112e50f354b3a

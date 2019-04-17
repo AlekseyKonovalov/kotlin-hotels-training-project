@@ -10,7 +10,7 @@ import io.reactivex.rxkotlin.plusAssign
 import timber.log.Timber
 
 interface HotelInformationActivityPresenter : BasePresenter<HotelInformationActivityView> {
-    fun loadHotelInfo(hotelId: Int)
+    fun loadHotelInfo(hotelId: String)
 }
 
 class HotelInformationActivityPresenterImpl(
@@ -31,7 +31,7 @@ class HotelInformationActivityPresenterImpl(
         this.view = null
     }
 
-    override fun loadHotelInfo(hotelId: Int) {
+    override fun loadHotelInfo(hotelId: String) {
         disposables += interactor.loadHotelInfo(hotelId)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({

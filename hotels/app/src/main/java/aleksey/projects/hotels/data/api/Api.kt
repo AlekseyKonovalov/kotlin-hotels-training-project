@@ -11,7 +11,7 @@ interface Api {
     fun getHotelList(): Observable<List<HotelModel>>
 
     @GET("{hotel_id}")
-    fun getHotelInformation(@Path(value = "hotel_id", encoded = true) hotelId: Int): Observable<HotelModel>
+    fun getHotelInformation(@Path(value = "hotel_id", encoded = true) hotelId: String): Observable<HotelModel>
 
     @GET("SortModes")
     fun getSortModes(): Observable<List<SortModeModel>>

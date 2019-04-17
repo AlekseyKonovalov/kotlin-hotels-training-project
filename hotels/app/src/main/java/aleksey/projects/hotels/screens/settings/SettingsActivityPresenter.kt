@@ -7,7 +7,7 @@ import android.arch.lifecycle.OnLifecycleEvent
 import io.reactivex.disposables.CompositeDisposable
 
 interface SettingsActivityPresenter : BasePresenter<SettingsActivityView> {
-
+    fun setUseInternetMode(isUseInternetMode: Boolean)
 }
 
 class SettingsActivityPresenterImpl(
@@ -26,6 +26,10 @@ class SettingsActivityPresenterImpl(
     override fun detachView() {
         disposables.dispose()
         this.view = null
+    }
+
+    override fun setUseInternetMode(isUseInternetMode: Boolean) {
+        interactor.setUseInternetMode(isUseInternetMode)
     }
 
 }

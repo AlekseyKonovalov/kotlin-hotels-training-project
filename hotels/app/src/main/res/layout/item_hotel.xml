@@ -1,186 +1,205 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:app="http://schemas.android.com/apk/res-auto"
-             android:id="@+id/container"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             android:layout_marginTop="15dp"
-             android:layout_marginBottom="10dp"
-             android:animateLayoutChanges="true"
-             android:background="@android:color/transparent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="15dp"
+    android:layout_marginBottom="10dp"
+    android:animateLayoutChanges="true"
+    android:background="@android:color/transparent">
 
     <android.support.design.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="4dp"
-            app:cardCornerRadius="4dp"
-            app:cardElevation="2dp">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="4dp"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="2dp">
 
         <LinearLayout
-                android:id="@+id/hotel_card"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+            android:id="@+id/hotel_card"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <ImageView
-                    android:id="@+id/image_hotel"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:maxHeight="200dp"
-                    android:layout_gravity="center"
-                    android:adjustViewBounds="true"
-                    android:scaleType="centerCrop"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:foreground="?android:attr/selectableItemBackgroundBorderless"/>
+                android:id="@+id/image_hotel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackgroundBorderless"
+                android:maxHeight="200dp"
+                android:scaleType="centerCrop" />
 
-            <LinearLayout android:layout_width="match_parent"
-                          android:layout_height="wrap_content"
-                          android:padding="10dp"
-                          android:paddingStart="20dp"
-                          android:orientation="horizontal">
+            <LinearLayout
+                android:id="@+id/hotel_info_panel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:paddingStart="20dp">
 
                 <TextView
-                        android:id="@+id/name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_gravity="center"
-                        android:textStyle="bold"
-                        android:textSize="16dp"
-                        android:ellipsize="end"
-                        android:maxLines="1"/>
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
 
 
                 <ImageView
-                        android:id="@+id/expand_image"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_weight="0"
-                        android:padding="10dp"
-                        android:src="@drawable/ic_expand_more"
-                        android:layout_gravity="right"
-                        android:adjustViewBounds="true"
-                        android:scaleType="centerCrop"/>
+                    android:id="@+id/expand_image"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="right"
+                    android:layout_weight="0"
+                    android:adjustViewBounds="true"
+                    android:padding="10dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_expand_more" />
 
             </LinearLayout>
 
             <LinearLayout
-                    android:id="@+id/expand_info"
+                android:id="@+id/expand_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="20dp"
+                android:visibility="gone">
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:orientation="vertical">
-                <LinearLayout android:layout_width="match_parent"
-                              android:layout_height="wrap_content"
-                              android:padding="10dp"
-                              android:paddingStart="20dp"
-                              android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:paddingStart="20dp">
+
                     <TextView
-                            android:layout_width="100dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:gravity="right"
-                            android:textStyle="bold"
-                            android:textSize="12dp"
-                            android:ellipsize="end"
-                            android:maxLines="1"
-                            android:text="Address"/>
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:ellipsize="end"
+                        android:gravity="right"
+                        android:maxLines="1"
+                        android:text="Address"
+                        android:textSize="12dp"
+                        android:textStyle="bold" />
+
                     <TextView
-                            android:id="@+id/address"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingStart="30dp"
-                            android:layout_weight="1"
-                            android:layout_gravity="center"
-                            android:textStyle="bold"
-                            android:textSize="12dp"
-                            android:ellipsize="end"
-                            android:maxLines="1"/>
+                        android:id="@+id/address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:paddingStart="30dp"
+                        android:textSize="12dp"
+                        android:textStyle="bold" />
                 </LinearLayout>
-                <LinearLayout android:layout_width="match_parent"
-                              android:layout_height="wrap_content"
-                              android:padding="10dp"
-                              android:paddingStart="20dp"
-                              android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:paddingStart="20dp">
+
                     <TextView
-                            android:layout_width="100dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:gravity="right"
-                            android:textStyle="bold"
-                            android:textSize="12dp"
-                            android:ellipsize="end"
-                            android:maxLines="1"
-                            android:text="Stars"/>
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:ellipsize="end"
+                        android:gravity="right"
+                        android:maxLines="1"
+                        android:text="Stars"
+                        android:textSize="12dp"
+                        android:textStyle="bold" />
+
                     <TextView
-                            android:id="@+id/stars"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingStart="30dp"
-                            android:layout_weight="1"
-                            android:layout_gravity="center"
-                            android:textStyle="bold"
-                            android:textSize="12dp"
-                            android:ellipsize="end"
-                            android:maxLines="1"/>
+                        android:id="@+id/stars"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:paddingStart="30dp"
+                        android:textSize="12dp"
+                        android:textStyle="bold" />
                 </LinearLayout>
-                <LinearLayout android:layout_width="match_parent"
-                              android:layout_height="wrap_content"
-                              android:padding="10dp"
-                              android:paddingStart="20dp"
-                              android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:paddingStart="20dp">
+
                     <TextView
-                            android:layout_width="100dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:gravity="right"
-                            android:textStyle="bold"
-                            android:textSize="12dp"
-                            android:ellipsize="end"
-                            android:maxLines="1"
-                            android:text="Suites availability"/>
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:ellipsize="end"
+                        android:gravity="right"
+                        android:maxLines="1"
+                        android:text="Suites availability"
+                        android:textSize="12dp"
+                        android:textStyle="bold" />
+
                     <TextView
-                            android:id="@+id/suites_availability"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingStart="30dp"
-                            android:layout_weight="1"
-                            android:layout_gravity="center"
-                            android:textStyle="bold"
-                            android:textSize="12dp"
-                            android:ellipsize="end"
-                            android:maxLines="1"/>
+                        android:id="@+id/suites_availability"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:paddingStart="30dp"
+                        android:textSize="12dp"
+                        android:textStyle="bold" />
                 </LinearLayout>
-                <LinearLayout android:layout_width="match_parent"
-                              android:layout_height="wrap_content"
-                              android:padding="10dp"
-                              android:paddingStart="20dp"
-                              android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:paddingStart="20dp">
+
                     <TextView
-                            android:layout_width="100dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:gravity="right"
-                            android:textStyle="bold"
-                            android:textSize="12dp"
-                            android:ellipsize="end"
-                            android:maxLines="1"
-                            android:text="Distance"/>
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:ellipsize="end"
+                        android:gravity="right"
+                        android:maxLines="1"
+                        android:text="Distance"
+                        android:textSize="12dp"
+                        android:textStyle="bold" />
+
                     <TextView
-                            android:id="@+id/distance"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingStart="30dp"
-                            android:layout_weight="1"
-                            android:layout_gravity="center"
-                            android:textStyle="bold"
-                            android:textSize="12dp"
-                            android:ellipsize="end"
-                            android:maxLines="1"/>
+                        android:id="@+id/distance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:paddingStart="30dp"
+                        android:textSize="12dp"
+                        android:textStyle="bold" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

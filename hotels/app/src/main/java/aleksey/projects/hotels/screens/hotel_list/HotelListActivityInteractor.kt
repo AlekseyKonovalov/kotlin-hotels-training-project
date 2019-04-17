@@ -13,23 +13,31 @@ import io.reactivex.schedulers.Schedulers
 interface HotelListActivityInteractor {
     fun getHotels(): Observable<List<HotelModel>>
     fun getSortModes(): Observable<List<SortModeModel>>
-    fun setHotelsInDB(hotel: Hotel): Completable
+    fun setHotelsInDB(hotel: Hotel)
+    fun getHotelsFromDB(): Observable<List<Hotel>>
 }
 
 class HotelListActivityInteractorImpl(val api: Api, val db: AppDatabase) : HotelListActivityInteractor {
     override fun getHotels(): Observable<List<HotelModel>> {
         return api.getHotelList()
-            .subscribeOn(Schedulers.io())
+                .subscribeOn(Schedulers.io())
     }
 
     override fun getSortModes(): Observable<List<SortModeModel>> {
         return api.getSortModes()
-            .subscribeOn(Schedulers.io())
+                .subscribeOn(Schedulers.io())
     }
 
-    override fun setHotelsInDB(hotel: Hotel): Completable {
-        return Completable.fromCallable { db.hotelDao().insert(hotel) }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+    override fun setHotelsInDB(hotel: Hotel) {
+        Completable.fromCallable { db.hotelDao().insert(hotel) }
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe()
+    }
+
+    override fun getHotelsFromDB(): Observable<List<Hotel>> {
+        return Observable.fromCallable { db.hotelDao().getHotels() }
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
     }
 }

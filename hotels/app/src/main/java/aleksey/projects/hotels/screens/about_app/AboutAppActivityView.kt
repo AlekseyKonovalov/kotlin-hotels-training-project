@@ -6,7 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.CoordinatorLayout
-import android.widget.Toolbar
+import android.support.v7.widget.Toolbar
 import dagger.android.support.DaggerAppCompatActivity
 import javax.inject.Inject
 
